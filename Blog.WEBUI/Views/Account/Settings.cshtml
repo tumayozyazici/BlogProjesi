@@ -1,0 +1,67 @@
+﻿@model Blog.WEBUI.Models.VMs.AuthorSettingsVM
+
+@{
+    ViewData["Title"] = "Settings";
+}
+
+<h1>Settings</h1>
+
+<h4>AuthorSettingsVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Settings" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="Photo" class="control-label"></label>
+                <input asp-for="Photo" type="file" name="file" class="form-control-file" />
+                <span asp-validation-for="Photo" class="text-danger"></span>
+            </div>
+            <div class="form-group my-2">
+                <input type="submit" value="Ayarları Kaydet" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-8 border">
+        <div class="row">
+            <div class="col-md-3 justify-content-end" style="border-color:blue">
+                <p>Kullanıcı Adınız:</p>
+                <p>Adınız:</p>
+                <p>Soyadınız:</p>
+                <p>Kayıtlı Emailiniz:</p>
+            </div>
+            <div class="col-md-3">
+                <p>@Model.UserName</p>
+                <p>@Model.FirstName</p>
+                <p>@Model.LastName</p>
+                <p>@Model.Email</p>
+            </div>
+            <div class="col-md-6">
+                <img src="@Model.Photo" width="180px"; height="225px";/>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

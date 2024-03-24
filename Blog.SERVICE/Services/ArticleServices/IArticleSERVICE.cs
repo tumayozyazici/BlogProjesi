@@ -1,4 +1,5 @@
 ﻿using Blog.DATA.Concrete;
+using Blog.REPO.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,10 @@ namespace Blog.SERVICE.Services.ArticleServices
         int Add(Article entity);
         int Update(Article entity);
         int Delete(Article entity);
+
+        List<ArticleListDTO> GetArticleJoinedList();
+        ArticleListDTO GetArticleJoined(int articleId);
+        int GetArticleCountByAuthorId(string Authorid);
 
         Task<List<Article>> GetAllAsync();
         Task<Article> GetByIdAsync(int id);

@@ -1,3 +1,11 @@
+using Blog.DATA.Concrete;
+using Blog.REPO.Concretes;
+using Blog.REPO.Context;
+using Blog.REPO.Interfaces;
+using Blog.SERVICE.Services.ArticleServices;
+using Blog.SERVICE.Services.TopicServices;
+using Microsoft.AspNetCore.Identity;
+
 namespace Blog.WEBUI
 {
     public class Program
@@ -8,6 +16,22 @@ namespace Blog.WEBUI
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            //DB
+            builder.Services.AddDbContext<BlogContext>();
+
+            //REPO
+            builder.Services.AddScoped<IArticleREPO, ArticleREPO>();
+            builder.Services.AddScoped<ITopicREPO, TopicREPO>();
+
+            //SERVICE
+            builder.Services.AddScoped<IArticleSERVICE, ArticleSERVICE>();
+            builder.Services.AddScoped<ITopicSERVICE, TopicSERVICE>();
+
+            //IDENTITY
+            builder.Services.AddIdentity<Author, AppRole>()
+                .AddEntityFrameworkStores<BlogContext>()
+                .AddDefaultTokenProviders();
 
             var app = builder.Build();
 
@@ -24,6 +48,7 @@ namespace Blog.WEBUI
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

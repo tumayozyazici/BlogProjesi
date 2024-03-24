@@ -1,6 +1,7 @@
 ﻿using Blog.DATA.Concrete;
 using Blog.DATA.Enums;
 using Blog.REPO.Concretes;
+using Blog.REPO.DTO;
 using Blog.REPO.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,21 @@ namespace Blog.SERVICE.Services.ArticleServices
         public async Task<List<Article>> GetAllAsync()
         {
             return await articleREPO.GetAllAsync();
+        }
+
+        public int GetArticleCountByAuthorId(string Authorid)
+        {
+            return articleREPO.GetArticleCountByAuthorId(Authorid);
+        }
+
+        public ArticleListDTO GetArticleJoined(int articleId)
+        {
+            return articleREPO.GetArticleJoined(articleId);
+        }
+
+        public List<ArticleListDTO> GetArticleJoinedList()
+        {
+            return articleREPO.GetArticleJoinedList();
         }
 
         public async Task<Article> GetByIdAsync(int id)

@@ -16,6 +16,8 @@ namespace Blog.DATA.Concrete
 
         public string Content { get; set; }
 
+        public int?  ReadingTime {  get; set; }
+
 
         //Navigations
         public string AuthorId { get; set; }

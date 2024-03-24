@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Blog.REPO.Migrations
 {
-    public partial class db : Migration
+    public partial class articleRead : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,8 +28,9 @@ namespace Blog.REPO.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Photo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -185,6 +186,7 @@ namespace Blog.REPO.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ReadingTime = table.Column<int>(type: "int", nullable: true),
                     AuthorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     TopicId = table.Column<int>(type: "int", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -207,6 +209,18 @@ namespace Blog.REPO.Migrations
                         principalTable: "Topics",
                         principalColumn: "TopicId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Topics",
+                columns: new[] { "TopicId", "CreateDate", "DeleteDate", "Status", "TopicName", "UpdateDate" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2024, 3, 24, 11, 54, 32, 896, DateTimeKind.Local).AddTicks(7061), null, 0, "Bilimsel", null },
+                    { 2, new DateTime(2024, 3, 24, 11, 54, 32, 896, DateTimeKind.Local).AddTicks(7086), null, 0, "Tarihsel", null },
+                    { 3, new DateTime(2024, 3, 24, 11, 54, 32, 896, DateTimeKind.Local).AddTicks(7088), null, 0, "Finansal", null },
+                    { 4, new DateTime(2024, 3, 24, 11, 54, 32, 896, DateTimeKind.Local).AddTicks(7089), null, 0, "Evrimsel", null },
+                    { 5, new DateTime(2024, 3, 24, 11, 54, 32, 896, DateTimeKind.Local).AddTicks(7090), null, 0, "Siyasal", null }
                 });
 
             migrationBuilder.CreateIndex(

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blog.REPO.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    [Migration("20240322213009_db")]
-    partial class db
+    [Migration("20240324085433_articleRead")]
+    partial class articleRead
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -73,6 +73,9 @@ namespace Blog.REPO.Migrations
                     b.Property<DateTime?>("DeleteDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("ReadingTime")
+                        .HasColumnType("int");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -121,11 +124,9 @@ namespace Blog.REPO.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -150,6 +151,9 @@ namespace Blog.REPO.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Photo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -207,6 +211,43 @@ namespace Blog.REPO.Migrations
                     b.HasKey("TopicId");
 
                     b.ToTable("Topics");
+
+                    b.HasData(
+                        new
+                        {
+                            TopicId = 1,
+                            CreateDate = new DateTime(2024, 3, 24, 11, 54, 32, 896, DateTimeKind.Local).AddTicks(7061),
+                            Status = 0,
+                            TopicName = "Bilimsel"
+                        },
+                        new
+                        {
+                            TopicId = 2,
+                            CreateDate = new DateTime(2024, 3, 24, 11, 54, 32, 896, DateTimeKind.Local).AddTicks(7086),
+                            Status = 0,
+                            TopicName = "Tarihsel"
+                        },
+                        new
+                        {
+                            TopicId = 3,
+                            CreateDate = new DateTime(2024, 3, 24, 11, 54, 32, 896, DateTimeKind.Local).AddTicks(7088),
+                            Status = 0,
+                            TopicName = "Finansal"
+                        },
+                        new
+                        {
+                            TopicId = 4,
+                            CreateDate = new DateTime(2024, 3, 24, 11, 54, 32, 896, DateTimeKind.Local).AddTicks(7089),
+                            Status = 0,
+                            TopicName = "Evrimsel"
+                        },
+                        new
+                        {
+                            TopicId = 5,
+                            CreateDate = new DateTime(2024, 3, 24, 11, 54, 32, 896, DateTimeKind.Local).AddTicks(7090),
+                            Status = 0,
+                            TopicName = "Siyasal"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

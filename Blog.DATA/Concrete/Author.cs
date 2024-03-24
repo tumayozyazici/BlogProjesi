@@ -11,11 +11,11 @@ namespace Blog.DATA.Concrete
 {
     public class Author : IdentityUser
     {
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
-        public string Photo { get; set; }
+        public string? Photo { get; set; } = "/img/123.png";
 
         public DateTime CreateDate { get; set; } = DateTime.Now;
 
