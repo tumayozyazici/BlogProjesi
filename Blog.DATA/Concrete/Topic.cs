@@ -17,5 +17,7 @@ namespace Blog.DATA.Concrete
 
         //Navigations
         public List<Article> Articles { get; set; }
+        public List<AuthorTopic> AuthorTopics { get; set; }
+
     }
 }

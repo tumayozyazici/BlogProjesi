@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Blog.DATA.Concrete;
+using System.ComponentModel;
 
 namespace Blog.WEBUI.Models.VMs
 {
@@ -18,5 +19,11 @@ namespace Blog.WEBUI.Models.VMs
 
         [DisplayName("Resminiz:")]
         public string? Photo { get; set; }
+
+        [DisplayName("Hakkımda:")]
+        public string? AboutMe { get; set; }
+
+        public List<Topic>? Topics { get; set; }
+        public List<AuthorTopic>? AuthorTopics { get; set; }
     }
 }

@@ -19,6 +19,8 @@ namespace Blog.REPO.Mapping
             builder.HasData(new Topic { TopicId = 3, TopicName = "Finansal" });
             builder.HasData(new Topic { TopicId = 4, TopicName = "Evrimsel" });
             builder.HasData(new Topic { TopicId = 5, TopicName = "Siyasal" });
+
+            builder.HasMany(x=>x.AuthorTopics).WithOne(x=>x.Topic).HasForeignKey(x=>x.TopicId);
         }
     }
 }

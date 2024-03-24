@@ -3,6 +3,7 @@ using Blog.REPO.Concretes;
 using Blog.REPO.Context;
 using Blog.REPO.Interfaces;
 using Blog.SERVICE.Services.ArticleServices;
+using Blog.SERVICE.Services.AuthorTopicServices;
 using Blog.SERVICE.Services.TopicServices;
 using Microsoft.AspNetCore.Identity;
 
@@ -23,10 +24,12 @@ namespace Blog.WEBUI
             //REPO
             builder.Services.AddScoped<IArticleREPO, ArticleREPO>();
             builder.Services.AddScoped<ITopicREPO, TopicREPO>();
+            builder.Services.AddScoped<IAuthorTopicREPO, AuthorTopicREPO>();
 
             //SERVICE
             builder.Services.AddScoped<IArticleSERVICE, ArticleSERVICE>();
             builder.Services.AddScoped<ITopicSERVICE, TopicSERVICE>();
+            builder.Services.AddScoped<IAuthorTopicSERVICE,AuthorTopicSERVICE>();
 
             //IDENTITY
             builder.Services.AddIdentity<Author, AppRole>()

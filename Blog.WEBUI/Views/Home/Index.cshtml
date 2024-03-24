@@ -1,8 +1,59 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using Blog.REPO.DTO
+@model List<ArticleListDTO>
+<br />
+<br />
+<br />
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="container justify-content-center">
+        <h1 style="font-family: 'Comic Sans MS', cursive;"><em>Aramıza Tekrar Hoşgeldin</em></h1>
+        <hr />
+        <br />
+        <br />
+        <br />
+        <div class="container">
+            <div class="row">
+
+                @foreach (var item in Model)
+                {
+                    <div class="col-4 mt-3">
+                        <div class="card" style="width: 25rem;">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item text-center">@item.Title</li>
+                                <li class="list-group-item" style="text-indent:35px">
+                                    @item.Content.Remove(150)...
+                                    <a class="float-end" asp-controller="Article" asp-action="ReadArticle" asp-route-id="@item.ArticleId">Devamı için...</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a><img src="@item.Photo" width="20px" height="20px" ; /> @item.UserName</a> @item.CreatedDate.Date.ToString("dd.MM.yyyy")
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+
+    </div>
+}
+else
+{
+    <div class="container justify-content-center">
+        <h1 style="font-family: 'Comic Sans MS', cursive;"><em>Hoşgeldin! Aramıza katılmak ister misin?</em></h1>
+        <hr />
+        <br />
+        <a asp-controller="Account" asp-action="Register" class="btn btn-danger btn-lg">Kayıt Ol!</a>
+        <br />
+        <br />
+    </div>
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+
+
+
+
+
+
+

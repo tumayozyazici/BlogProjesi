@@ -1,11 +1,8 @@
 ﻿@using Blog.WEBUI.Models.VMs
 @model TopicListVM
 
-@{
-    ViewData["Title"] = "List";
-}
 
-<h1>List</h1>
+
 <br />
 <br />
 <br />
@@ -13,15 +10,11 @@
 <br />
 <br />
 
-@* <div class="row">
-        <div class="col-6">
-            <a class="btn btn-success" asp-controller="Articles" asp-action="ListByTopics" asp-route-id="@item.TopicId">@item.TopicName</a>
-        </div>
-    </div> *@
+
 <div class="d-grid gap-2 col-6 mx-auto">
     @foreach (var item in Model.Topics)
     {
-        <a class="btn btn-primary" asp-controller="Articles" asp-action="ListByTopics" asp-route-id="@item.TopicId" type="button">@item.TopicName</a>
+        <a class="btn btn-primary" asp-controller="Article" asp-action="ListByTopics" asp-route-id="@item.TopicId" type="button">@item.TopicName</a>
     }
 </div>
 

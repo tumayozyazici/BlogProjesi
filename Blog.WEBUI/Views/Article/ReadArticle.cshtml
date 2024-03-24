@@ -22,7 +22,7 @@
                     <img src="@Model.Photo" width="100px" ; height="120px" ; />
                 </div>
                 <div class="col-md-6" style="text-indent:20px; font-size: 13px" >
-                    @Model.AuthorCreatedDate.Date.ToString("dd MMMM yyyy") tarihinden itibaren yazmakta olan @Model.UserName 'ın bu güne kadar @Model.ArticleCount makalesi bulunmaktadır. Yazarın bilgi ve makalelerine göz atmak istersen <a asp-controller="Account" asp-action="Profile" asp-route-id="@Model.AuthorId">tıkla..</a>
+                    @Model.AuthorCreatedDate.Date.ToString("dd MMMM yyyy") tarihinden itibaren yazmakta olan @Model.UserName 'ın bu güne kadar @Model.ArticleCount makalesi bulunmaktadır. Yazarın bilgi ve makalelerine göz atmak istersen <a asp-controller="Account" asp-action="AuthorProfile" asp-route-id="@Model.AuthorId">tıkla..</a>
                 </div>
             </div>
         </div>

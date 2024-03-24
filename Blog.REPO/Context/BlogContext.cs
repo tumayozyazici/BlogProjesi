@@ -18,6 +18,7 @@ namespace Blog.REPO.Context
         public DbSet<Author> Authors { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<Topic> Topics { get; set; }
+        public DbSet<AuthorTopic> AuthorTopics { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

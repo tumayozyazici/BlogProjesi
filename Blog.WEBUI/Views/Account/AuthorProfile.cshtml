@@ -1,0 +1,50 @@
+﻿@using Blog.WEBUI.Models.VMs
+@model AuthorProfileVM
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="container">
+    <div class="row border">
+        <div class="col-3">
+            <img src="@Model.Photo" width="180px" ; height="225px" ; />
+            <p>@Model.FirstName @Model.LastName</p>
+            <p>@Model.UserName</p>
+            <p>@Model.Email</p>
+        </div>
+        <div class="col-9">
+            <p style="font-size:30px; font-weight:bold"><em>Hakkımda:</em></p>
+            <hr style="height: 5px; background-color: black; border: none;">
+            <div style="text-indent:25px; text-align:justify">
+                @Model.AboutMe
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<h1><em>Yayınladığım Makaleler</em></h1>
+<hr />
+<br />
+<div class="container">
+    <div class="row">
+
+        @foreach (var item in Model.Articles)
+        {
+            <div class="col-4 mt-3">
+                <div class="card" style="width: 25rem;">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item text-center">@item.Title</li>
+                        <li class="list-group-item" style="text-indent:35px">
+                            @item.Content.Remove(150)...
+                            <a class="float-end" asp-controller="Article" asp-action="ReadArticle" asp-route-id="@item.ArticleId">Devamı için...</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+</div>

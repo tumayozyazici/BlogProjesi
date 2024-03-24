@@ -12,11 +12,11 @@ namespace Blog.WEBUI.HelperClass
 
 
             MailMessage mail = new MailMessage();
-            mail.From = new MailAddress("burgershop12@outlook.com", "BurgerShop");
+            mail.From = new MailAddress("burgershop12@outlook.com", "dökülBlog");
             mail.To.Add(vm.Email);
-            mail.Subject = "BurgerShop Doğrulama Kodu";
+            mail.Subject = "dökülBlog Doğrulama Kodu";
             mail.IsBodyHtml = true;
-            mail.Body = "BurgerShop'a hoşgeldiniz. İşte doğrulama kodun: " + confirmationCode;
+            mail.Body = "dökülBlog'a hoşgeldiniz. İşte doğrulama kodun: " + confirmationCode;
 
             SmtpClient smtpClient = new SmtpClient();
             smtpClient.Port = 587;

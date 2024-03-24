@@ -16,8 +16,13 @@ namespace Blog.SERVICE.Services.ArticleServices
         int Delete(Article entity);
 
         List<ArticleListDTO> GetArticleJoinedList();
+        List<ArticleListDTO> GetArticleJoinedByTopicId(int topicId);
+
+        List<ArticleListDTO> GetArticleJoinedByInterest(List<int> topicIds);
+
         ArticleListDTO GetArticleJoined(int articleId);
         int GetArticleCountByAuthorId(string Authorid);
+
 
         Task<List<Article>> GetAllAsync();
         Task<Article> GetByIdAsync(int id);

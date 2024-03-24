@@ -40,6 +40,8 @@ namespace Blog.SERVICE.Services.ArticleServices
             return await articleREPO.GetAllAsync();
         }
 
+        
+
         public int GetArticleCountByAuthorId(string Authorid)
         {
             return articleREPO.GetArticleCountByAuthorId(Authorid);
@@ -48,6 +50,16 @@ namespace Blog.SERVICE.Services.ArticleServices
         public ArticleListDTO GetArticleJoined(int articleId)
         {
             return articleREPO.GetArticleJoined(articleId);
+        }
+
+        public List<ArticleListDTO> GetArticleJoinedByInterest(List<int> topicIds)
+        {
+            return articleREPO.GetArticleJoinedByInterest(topicIds);
+        }
+
+        public List<ArticleListDTO> GetArticleJoinedByTopicId(int topicId)
+        {
+            return articleREPO.GetArticleJoinedByTopicId(topicId);
         }
 
         public List<ArticleListDTO> GetArticleJoinedList()

@@ -25,8 +25,13 @@ namespace Blog.DATA.Concrete
 
         public Status Status { get; set; } = Status.Added;
 
+        public string? AboutMe { get; set; }
+
+        
+
 
         //Navigations
         public List<Article> Articles { get; set; }
+        public List<AuthorTopic> AuthorTopics { get; set; }
     }
 }

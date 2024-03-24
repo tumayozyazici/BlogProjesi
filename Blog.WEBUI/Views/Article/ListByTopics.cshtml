@@ -1,0 +1,25 @@
+﻿@using Blog.REPO.DTO
+@model List<ArticleListDTO>
+
+<div class="container">
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-4 mt-3">
+                <div class="card" style="width: 25rem;">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item text-center">@item.Title</li>
+                        <li class="list-group-item" style="text-indent:35px">
+                            @item.Content.Remove(150)...
+                            <a class="float-end" asp-controller="Article" asp-action="ReadArticle" asp-route-id="@item.ArticleId">Devamı için...</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a><img src="@item.Photo" width="20px" height="20px" ; /> @item.UserName</a> @item.CreatedDate.Date.ToString("dd.MM.yyyy")
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+</div>

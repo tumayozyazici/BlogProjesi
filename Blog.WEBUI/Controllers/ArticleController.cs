@@ -56,5 +56,13 @@ namespace Blog.WEBUI.Controllers
 
             return View(result);
         }
+
+        [HttpGet]
+        public IActionResult ListByTopics(int id)
+        {
+            var result = articleSERVICE.GetArticleJoinedByTopicId(id);
+
+            return View(result);
+        }
     }
 }

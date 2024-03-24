@@ -15,7 +15,8 @@
                             @item.Content.Remove(150)...
                             <a class="float-end" asp-controller="Article" asp-action="ReadArticle" asp-route-id="@item.ArticleId">Devamı için...</a>
                             </li>
-                            <li class="list-group-item"><a><img src="@item.Photo" width="20px" height="20px" ; /> @item.UserName</a> @item.CreatedDate.Date.ToString("dd.MM.yyyy")
+                        <li class="list-group-item">
+                            <a><img src="@item.Photo" width="20px" height="20px" ; /> @item.UserName</a> @item.CreatedDate.Date.ToString("dd.MM.yyyy") &nbsp &nbsp &nbsp Okuma Süresi: @item.ReadingTime dakika
                             </li>
                         </ul>
                     </div>

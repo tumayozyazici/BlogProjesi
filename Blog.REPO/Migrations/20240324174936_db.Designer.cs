@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blog.REPO.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    [Migration("20240324085433_articleRead")]
-    partial class articleRead
+    [Migration("20240324174936_db")]
+    partial class db
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -103,6 +103,9 @@ namespace Blog.REPO.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("AboutMe")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
@@ -184,6 +187,42 @@ namespace Blog.REPO.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("Blog.DATA.Concrete.AuthorTopic", b =>
+                {
+                    b.Property<int>("AuthorTopicId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AuthorTopicId"), 1L, 1);
+
+                    b.Property<string>("AuthorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeleteDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TopicId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("AuthorTopicId");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("TopicId");
+
+                    b.ToTable("AuthorTopics");
+                });
+
             modelBuilder.Entity("Blog.DATA.Concrete.Topic", b =>
                 {
                     b.Property<int>("TopicId")
@@ -216,35 +255,35 @@ namespace Blog.REPO.Migrations
                         new
                         {
                             TopicId = 1,
-                            CreateDate = new DateTime(2024, 3, 24, 11, 54, 32, 896, DateTimeKind.Local).AddTicks(7061),
+                            CreateDate = new DateTime(2024, 3, 24, 20, 49, 36, 20, DateTimeKind.Local).AddTicks(4587),
                             Status = 0,
                             TopicName = "Bilimsel"
                         },
                         new
                         {
                             TopicId = 2,
-                            CreateDate = new DateTime(2024, 3, 24, 11, 54, 32, 896, DateTimeKind.Local).AddTicks(7086),
+                            CreateDate = new DateTime(2024, 3, 24, 20, 49, 36, 20, DateTimeKind.Local).AddTicks(4605),
                             Status = 0,
                             TopicName = "Tarihsel"
                         },
                         new
                         {
                             TopicId = 3,
-                            CreateDate = new DateTime(2024, 3, 24, 11, 54, 32, 896, DateTimeKind.Local).AddTicks(7088),
+                            CreateDate = new DateTime(2024, 3, 24, 20, 49, 36, 20, DateTimeKind.Local).AddTicks(4607),
                             Status = 0,
                             TopicName = "Finansal"
                         },
                         new
                         {
                             TopicId = 4,
-                            CreateDate = new DateTime(2024, 3, 24, 11, 54, 32, 896, DateTimeKind.Local).AddTicks(7089),
+                            CreateDate = new DateTime(2024, 3, 24, 20, 49, 36, 20, DateTimeKind.Local).AddTicks(4609),
                             Status = 0,
                             TopicName = "Evrimsel"
                         },
                         new
                         {
                             TopicId = 5,
-                            CreateDate = new DateTime(2024, 3, 24, 11, 54, 32, 896, DateTimeKind.Local).AddTicks(7090),
+                            CreateDate = new DateTime(2024, 3, 24, 20, 49, 36, 20, DateTimeKind.Local).AddTicks(4610),
                             Status = 0,
                             TopicName = "Siyasal"
                         });
@@ -375,6 +414,25 @@ namespace Blog.REPO.Migrations
                     b.Navigation("Topic");
                 });
 
+            modelBuilder.Entity("Blog.DATA.Concrete.AuthorTopic", b =>
+                {
+                    b.HasOne("Blog.DATA.Concrete.Author", "Author")
+                        .WithMany("AuthorTopics")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Blog.DATA.Concrete.Topic", "Topic")
+                        .WithMany("AuthorTopics")
+                        .HasForeignKey("TopicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Topic");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Blog.DATA.Concrete.AppRole", null)
@@ -429,11 +487,15 @@ namespace Blog.REPO.Migrations
             modelBuilder.Entity("Blog.DATA.Concrete.Author", b =>
                 {
                     b.Navigation("Articles");
+
+                    b.Navigation("AuthorTopics");
                 });
 
             modelBuilder.Entity("Blog.DATA.Concrete.Topic", b =>
                 {
                     b.Navigation("Articles");
+
+                    b.Navigation("AuthorTopics");
                 });
 #pragma warning restore 612, 618
         }
