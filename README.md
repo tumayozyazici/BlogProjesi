@@ -1,4 +1,5 @@
-# dökül.. Blog Projesi
+dökül.. Blog Projesi
+# <i style="color: #6495ED;">dökül..</i>  Blog Projesi
 
 Bu proje, ASP.NET Core MVC, Entity Framework, MSSQL, Bootstrap, CSS, HTML ve Identity teknolojilerini kullanarak, verilen 2 günlük sınav süresi içerisinde bireysel olarak oluşturmuş olduğum bir blog uygulamasıdır.
 
