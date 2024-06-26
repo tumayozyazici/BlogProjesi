@@ -1,4 +1,5 @@
 ﻿using Blog.DATA.Concrete;
+using Blog.REPO.Context;
 using Blog.SERVICE.Services.ArticleServices;
 using Blog.SERVICE.Services.TopicServices;
 using Blog.WEBUI.Models.VMs;
@@ -63,6 +64,49 @@ namespace Blog.WEBUI.Controllers
             var result = articleSERVICE.GetArticleJoinedByTopicId(id);
 
             return View(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateArticle(int id)
+        {
+            var article = await articleSERVICE.GetByIdAsync(id);
+
+            List<Topic> topics = await topicService.GetAllAsync();
+            ViewBag.Topics = new SelectList(topics, "TopicId", "TopicName");
+
+            ArticleUpdateVM vm = new ArticleUpdateVM()
+            {
+                ArticleId = article.ArticleId,
+                Title = article.Title,
+                Content = article.Content,
+                TopicId = article.TopicId,
+                ReadingTime = (int)article.ReadingTime
+            };
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateArticle(ArticleUpdateVM vm) 
+        {
+            var article = await articleSERVICE.GetByIdAsync(vm.ArticleId);
+            article.Title = vm.Title;
+            article.Content = vm.Content;
+            article.TopicId = vm.TopicId;
+            article.ReadingTime = vm.ReadingTime;
+
+            articleSERVICE.Update(article);
+
+            return RedirectToAction("Index","Home");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> DeleteArticle(int id)
+        {
+            var article = await articleSERVICE.GetByIdAsync(id);
+            articleSERVICE.Delete(article);
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

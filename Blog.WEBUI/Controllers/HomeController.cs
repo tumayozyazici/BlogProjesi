@@ -1,10 +1,12 @@
 ﻿using Blog.DATA.Concrete;
+using Blog.REPO.Context;
 using Blog.REPO.DTO;
 using Blog.SERVICE.Services.ArticleServices;
 using Blog.SERVICE.Services.AuthorTopicServices;
 using Blog.WEBUI.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace Blog.WEBUI.Controllers
@@ -34,9 +36,7 @@ namespace Blog.WEBUI.Controllers
                 var ids = _authorTopicService.GetByAuthorId(user.Id).Select(x => x.TopicId).ToList();
                 list = _articleService.GetArticleJoinedByInterest(ids);
             }
-
             return View(list);
-
         }
 
         public IActionResult Privacy()

@@ -15,6 +15,13 @@
                     <li class="list-group-item" style="text-indent: 35px; text-align:justify;">@Model.Content</li>
                 </ul>
             </div>
+            @if (Model.UserName == User.Identity.Name)
+            {
+                <div>
+                    <a class="btn btn-warning mt-2"  type="submit" asp-action="UpdateArticle" asp-controller="Article"
+                       asp-route-id="@Model.ArticleId">Güncelle</a>
+                </div>
+            }
         </div>
         <div class="col-4">
             <div class="row border">

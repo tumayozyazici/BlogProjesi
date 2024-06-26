@@ -16,7 +16,7 @@ namespace Blog.REPO.Concretes
 
         public ArticleREPO(BlogContext context) : base(context)
         {
-            _context= context;
+            _context = context;
         }
 
 
@@ -27,7 +27,7 @@ namespace Blog.REPO.Concretes
 
         public ArticleListDTO GetArticleJoined(int articleId)
         {
-            return _context.Articles.Join(_context.Authors, a => a.AuthorId, b => b.Id, (a, b) => new { Articles = a, Authors = b }).Where(x=>x.Articles.ArticleId==articleId).Select(x => new ArticleListDTO
+            return _context.Articles.Join(_context.Authors, a => a.AuthorId, b => b.Id, (a, b) => new { Articles = a, Authors = b }).Where(x => x.Articles.ArticleId == articleId).Select(x => new ArticleListDTO
             {
                 AuthorId = x.Authors.Id,
                 ArticleId = x.Articles.ArticleId,
@@ -44,17 +44,18 @@ namespace Blog.REPO.Concretes
 
         public List<ArticleListDTO> GetArticleJoinedByInterest(List<int> topicIds)
         {
-            return _context.Articles.Join(_context.Topics, a => a.TopicId, t => t.TopicId, (a, t) => new { Articles = a, Topics = t }).Join(_context.AuthorTopics, at => at.Topics.TopicId, b => b.TopicId, (at, b) => new { ArticlesTopics = at, AuthorTopics = b }).Join(_context.Authors, atb => atb.AuthorTopics.AuthorId, c => c.Id, (atb, c) => new { Combined = atb, Authors = c }).Where(x => topicIds.Contains(x.Combined.ArticlesTopics.Topics.TopicId)).Select(x=> new ArticleListDTO
+            return _context.Articles.Join(_context.Authors, a => a.AuthorId, b => b.Id, (a, b) => new { Articles = a, Authors = b }).Where(x => topicIds.Contains(x.Articles.TopicId)).Select(x => new ArticleListDTO
             {
                 AuthorId = x.Authors.Id,
-                ArticleId = x.Combined.ArticlesTopics.Articles.ArticleId,
-                Title = x.Combined.ArticlesTopics.Articles.Title,
-                Content = x.Combined.ArticlesTopics.Articles.Content,
-                ReadingTime = (int)x.Combined.ArticlesTopics.Articles.ReadingTime,
+                ArticleId = x.Articles.ArticleId,
+                Title = x.Articles.Title,
+                Content = x.Articles.Content,
+                ReadingTime = (int)x.Articles.ReadingTime,
                 Photo = x.Authors.Photo,
                 UserName = x.Authors.UserName,
-                CreatedDate = x.Combined.ArticlesTopics.Articles.CreateDate,
+                CreatedDate = x.Articles.CreateDate,
                 AuthorCreatedDate = x.Authors.CreateDate
+
             }).ToList();
         }
 
@@ -72,7 +73,7 @@ namespace Blog.REPO.Concretes
                 CreatedDate = x.Articles.CreateDate,
                 AuthorCreatedDate = x.Authors.CreateDate
 
-            }).ToList() ;
+            }).ToList();
         }
 
         public List<ArticleListDTO> GetArticleJoinedList()
@@ -84,9 +85,9 @@ namespace Blog.REPO.Concretes
                 Content = x.Articles.Content,
                 ReadingTime = (int)x.Articles.ReadingTime,
                 Photo = x.Authors.Photo,
-                UserName=x.Authors.UserName,
+                UserName = x.Authors.UserName,
                 CreatedDate = x.Articles.CreateDate,
-                AuthorCreatedDate= x.Authors.CreateDate
+                AuthorCreatedDate = x.Authors.CreateDate
             }).ToList();
         }
     }

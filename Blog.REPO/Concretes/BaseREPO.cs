@@ -36,7 +36,7 @@ namespace Blog.REPO.Concretes
 
         public int Delete(T entity)
         {
-            _table.Update(entity);
+            _table.Remove(entity);
             return _context.SaveChanges();
         }
 

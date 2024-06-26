@@ -45,7 +45,6 @@ namespace Blog.WEBUI.Controllers
                     Random rnd = new Random();
                     int confirmationCode = rnd.Next(10000, 99999);
 
-
                     HelperClass.Helper.SendMail(user, vm, confirmationCode);
 
                     _user = vm;
@@ -142,10 +141,10 @@ namespace Blog.WEBUI.Controllers
             List<AuthorTopic> authorTopics = new List<AuthorTopic>();
             foreach (var item in selectedIds)
             {
-                AuthorTopic authorTopic = new AuthorTopic() { AuthorId=result.Id, TopicId = item};
+                AuthorTopic authorTopic = new AuthorTopic() { AuthorId = result.Id, TopicId = item };
                 authorTopics.Add(authorTopic);
             }
-            
+
             if (_authorTopicService.GetByAuthorId(result.Id).Count() > 0)
             {
                 var gotToDelete = _authorTopicService.GetByAuthorId(result.Id);
@@ -153,7 +152,7 @@ namespace Blog.WEBUI.Controllers
             }
 
             _authorTopicService.Create(authorTopics);
-            
+
             if (result is not null)
             {
                 result.FirstName = vm.FirstName;
@@ -169,6 +168,7 @@ namespace Blog.WEBUI.Controllers
             }
 
             await _userManager.UpdateAsync(result);
+
             return RedirectToAction("Index", "Home");
         }
 

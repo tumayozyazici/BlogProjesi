@@ -22,8 +22,10 @@ namespace Blog.REPO.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=GHOST2023\\SQLEXPRESS;Database=BlogProject;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
-        }
+			//optionsBuilder.UseSqlServer("Server=GHOST2023\\SQLEXPRESS;Database=BlogProject;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
+
+			optionsBuilder.UseSqlServer("Server=tcp:hr-server.database.windows.net,1433;Database=Deneme1-HR;User ID=hrsqladmin;Password=Admin123;Trusted_Connection=false;TrustServerCertificate=False;MultipleActiveResultSets=true");
+		}
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

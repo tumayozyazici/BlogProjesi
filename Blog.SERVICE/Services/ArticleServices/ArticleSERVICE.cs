@@ -32,7 +32,7 @@ namespace Blog.SERVICE.Services.ArticleServices
         {
             entity.DeleteDate = DateTime.Now;
             entity.Status = Status.Deleted;
-            return articleREPO.Update(entity);
+            return articleREPO.Delete(entity);
         }
 
         public async Task<List<Article>> GetAllAsync()
